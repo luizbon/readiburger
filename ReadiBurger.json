@@ -1,0 +1,270 @@
+{
+  "luis_schema_version": "2.1.0",
+  "versionId": "0.1",
+  "name": "ReadiBurger",
+  "desc": "Sample Pizza Bot",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "OrderBurger"
+    },
+    {
+      "name": "UseCoupon"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Beef"
+    },
+    {
+      "name": "BurgerType"
+    },
+    {
+      "name": "Byo.Bun"
+    },
+    {
+      "name": "Byo.Cheese"
+    },
+    {
+      "name": "Byo.Extras"
+    },
+    {
+      "name": "Byo.Patty"
+    },
+    {
+      "name": "Chicken"
+    },
+    {
+      "name": "Veg"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "actions": [],
+  "model_features": [
+    {
+      "name": "BeefOptions",
+      "mode": true,
+      "words": "Classic,Double",
+      "activated": true
+    },
+    {
+      "name": "BunOptions",
+      "mode": true,
+      "words": "Classic,Gluten Free,Brioche",
+      "activated": true
+    },
+    {
+      "name": "BurgerTypeOptions",
+      "mode": true,
+      "words": "Beef,Chichen,Veg,Byo,Build your own",
+      "activated": true
+    },
+    {
+      "name": "CheeseOptions",
+      "mode": true,
+      "words": "American,Cheddar,Tasty",
+      "activated": true
+    },
+    {
+      "name": "ChickenOptions",
+      "mode": true,
+      "words": "Crispy,Grilled",
+      "activated": true
+    },
+    {
+      "name": "Coupon",
+      "mode": true,
+      "words": "20 % off,Chicken 20 %,Beef 20 %",
+      "activated": true
+    },
+    {
+      "name": "ExtraOptions",
+      "mode": true,
+      "words": "Ketchup,Mustard,Pickles,Bacon,Tomato,Lettuce,Onion",
+      "activated": true
+    },
+    {
+      "name": "PattyOptions",
+      "mode": true,
+      "words": "Beef,Chicken,Pork,Soy",
+      "activated": true
+    },
+    {
+      "name": "VegOptions",
+      "mode": true,
+      "words": "Soy",
+      "activated": true
+    }
+  ],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "test",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "order",
+      "intent": "OrderBurger",
+      "entities": []
+    },
+    {
+      "text": "i'd like to use my 20% off cupon",
+      "intent": "UseCoupon",
+      "entities": []
+    },
+    {
+      "text": "do you have any coupons?",
+      "intent": "UseCoupon",
+      "entities": []
+    },
+    {
+      "text": "i want to use my coupon",
+      "intent": "UseCoupon",
+      "entities": []
+    },
+    {
+      "text": "beef burger",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "BurgerType",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "i have a 20% off coupon for a chicken burger",
+      "intent": "UseCoupon",
+      "entities": []
+    },
+    {
+      "text": "i'd like a beef burger using my 20% off coupon",
+      "intent": "UseCoupon",
+      "entities": []
+    },
+    {
+      "text": "beef burguer with onion",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "Byo.Patty",
+          "startPos": 0,
+          "endPos": 3
+        },
+        {
+          "entity": "Byo.Extras",
+          "startPos": 18,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "i order burger",
+      "intent": "OrderBurger",
+      "entities": []
+    },
+    {
+      "text": "beef classic",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "Byo.Bun",
+          "startPos": 5,
+          "endPos": 11
+        },
+        {
+          "entity": "Byo.Patty",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "we want a byo beef patty american cheese and classic bun burger",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "Byo.Bun",
+          "startPos": 45,
+          "endPos": 51
+        },
+        {
+          "entity": "Byo.Patty",
+          "startPos": 14,
+          "endPos": 17
+        },
+        {
+          "entity": "Byo.Cheese",
+          "startPos": 25,
+          "endPos": 32
+        },
+        {
+          "entity": "BurgerType",
+          "startPos": 10,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "i'd like a chicken burger",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "BurgerType",
+          "startPos": 11,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "can i get a burger?",
+      "intent": "OrderBurger",
+      "entities": []
+    },
+    {
+      "text": "crispy chicken burger",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "Chicken",
+          "startPos": 0,
+          "endPos": 5
+        },
+        {
+          "entity": "BurgerType",
+          "startPos": 7,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "soy burger",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "Veg",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "veg buger",
+      "intent": "OrderBurger",
+      "entities": [
+        {
+          "entity": "BurgerType",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    }
+  ]
+}

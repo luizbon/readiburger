@@ -1,16 +1,10 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.FormFlow;
+﻿using Microsoft.Bot.Builder.FormFlow;
 using ReadiBurger.Models;
 
 namespace ReadiBurger.Dialogs
 {
     public class BurgerDialog
     {
-        public static IDialog<BurgerOrder> MakeDialog()
-        {
-            return Chain.From(() => FormDialog.FromForm(BuildForm));
-        }
-
         public static IForm<BurgerOrder> BuildForm()
         {
             var builder = new FormBuilder<BurgerOrder>();
@@ -21,7 +15,6 @@ namespace ReadiBurger.Dialogs
             bool IsVeg(BurgerOrder burger) => burger.BurgerType == BurgerOptions.VegBurger;
 
             return builder
-                .Message("Welcome to ReadiBurger, what would you like today?")
                 .Field(nameof(BurgerOrder.BurgerType))
                 .Field("Byo.Bun", IsByo)
                 .Field("Byo.Patty", IsByo)
@@ -35,7 +28,6 @@ namespace ReadiBurger.Dialogs
                 .Confirm("Would you like a {&Beef} {Beef} burger?", IsBeef)
                 .Confirm("Would you like a {&Chicken} {Chicken} burger?", IsChicken)
                 .Confirm("Would you like a {&Veg} {Veg} burger?", IsVeg)
-                .OnCompletion(async (context, state) => await context.PostAsync(state.ToString()))
                 .Build();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,19 +15,19 @@ namespace ReadiBurger.Controllers
     {
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
-            if (activity.Type == ActivityTypes.Message || activity.Type == ActivityTypes.ConversationUpdate && activity.MembersAdded.Any(m => m.Name != "Bot"))
+            if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, BurgerDialog.MakeDialog);
+                await Conversation.SendAsync(activity, () => new LuisBurgerDialog(BurgerDialog.BuildForm));
             }
             else
             {
-                HandleSystemMessage(activity);
+                await HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
 
-        private Activity HandleSystemMessage(Activity message)
+        private async Task<Activity> HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -35,9 +36,13 @@ namespace ReadiBurger.Controllers
             }
             else if (message.Type == ActivityTypes.ConversationUpdate)
             {
-                // Handle conversation state changes, like members being added and removed
-                // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
-                // Not available in all channels
+                if (message.MembersAdded.All(x => x.Id != message.Recipient.Id))
+                {
+                    var reply = message.CreateReply("Welcome to ReadiBurger, what would you like today?");
+                    ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
+
+                    await connector.Conversations.ReplyToActivityAsync(reply);
+                }
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
